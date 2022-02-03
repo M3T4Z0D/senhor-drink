@@ -6,7 +6,6 @@ class FrontCodes {
             let link = document.createElement('a');
             let li = document.createElement('li');
             li.setAttribute('id', item.idDrink);
-            link.setAttribute('href', window.location.origin + '/visualizar?id=' + item.idDrink);            
             link.appendChild(document.createTextNode(item.strDrink));
             li.appendChild(link);
             ul.appendChild(li);
