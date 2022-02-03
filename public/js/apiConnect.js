@@ -5,7 +5,7 @@ class Connections {
         let response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`);
         let data = await response.json();
     
-        return data.drinks[0];
+        return data.drinks;
     }
 
     static async getDrinksByName(name){

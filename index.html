@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="public/css/reset.css">
     <link rel="stylesheet" href="public/css/style.css">
     <script src="public/js/apiConnect.js" defer></script>
+    <script src="public/js/frontCodes.js"></script>
     <script src="public/js/index.js" defer></script>
 </head>
 
@@ -34,16 +35,22 @@
                 <h2>Clique para gerar um drink aleatório</h2>
             </div>
             <div class="container-item card">
-                <form class="form">
+                <form class="form" >
                     <div>
                         <input type="text" id="drinkSearch">
                     </div>
                     <div>
-                        <button id="searchDrink">Buscar</button>
+                        <button type="button" id="searchDrink">Buscar</button>
                     </div>
                 </form>                
             </div>            
         </div>        
+    </section>
+
+    <section class="drinksList">
+        <ul id="listaDrink">
+            
+        </ul>
     </section>
 </body>
 
