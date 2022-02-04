@@ -8,8 +8,10 @@ function listenerRandomDrink() {
 
     botao.onclick = async function () {
         event.preventDefault();
+        FrontCodes.setLoadingRandom();
         let drink = await Connections.getRandomDrink();
         FrontCodes.listaItens(drink);
+        FrontCodes.setRandomText();
     };
 }
 
