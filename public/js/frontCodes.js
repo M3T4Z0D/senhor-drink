@@ -1,7 +1,7 @@
 class FrontCodes {
     static textRandom = 'Clique para gerar um drink aleatório';
     static URL_ROOT = location.href.substring(0, location.href.lastIndexOf('/') + 1);
-    static pathLoadingGif = `${this.URL_ROOT}/public/images/loading.gif`;
+    static pathLoadingGif = `${this.URL_ROOT}/public/images/drink_loader.gif`;
 
     static listaItens(itens){
         let ul = document.getElementById('listaDrink');

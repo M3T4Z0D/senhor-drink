@@ -37,6 +37,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
   flex-direction: row;
 }
 
@@ -115,6 +116,10 @@ ul.nav li.float-right {
 }
 
 /*NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR */
+
+#drinkAleatorio{
+  display: flex;
+}
 
 @media screen and (max-width: 600px) {
   ul.nav li.float-right,
