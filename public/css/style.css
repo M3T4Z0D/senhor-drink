@@ -27,10 +27,6 @@ section {
   overflow: hidden;
 }
 
-.drinksList > .container {
-  overflow-x: auto;
-}
-
 .main-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -95,8 +91,14 @@ a:active {
 }
 
 .card-footer {
-  flex-grow: 2;
+  flex-grow: 2;  
   overflow: hidden;
+}
+
+.card-footer .description{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
 }
 
 /*NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR */
@@ -141,7 +143,7 @@ ul.nav li.float-right {
   display: flex;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   ul.nav li.float-right,
   ul.nav li {
     float: none;
@@ -149,5 +151,9 @@ ul.nav li.float-right {
 
   .main-card {
     flex-direction: column;
+  }
+
+  .container{
+    justify-content: center;
   }
 }

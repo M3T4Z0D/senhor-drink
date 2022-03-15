@@ -18,11 +18,15 @@ class FrontCodes {
             cardBody.setAttribute('class', 'card-body');
             let img = document.createElement('img');
             img.setAttribute('src', item.strDrinkThumb);
+            img.setAttribute('loading', 'lazy');
             cardBody.appendChild(img);
 
             let cardFooter = document.createElement('div');
             cardFooter.setAttribute('class', 'card-footer');
-            cardFooter.appendChild(document.createTextNode(item.strInstructions))
+            let itemSummary = document.createElement('p');
+            itemSummary.setAttribute('class', 'description');
+            itemSummary.appendChild(document.createTextNode(item.strInstructions));
+            cardFooter.appendChild(itemSummary);
 
             card.appendChild(cardHeader);
             card.appendChild(cardBody);
