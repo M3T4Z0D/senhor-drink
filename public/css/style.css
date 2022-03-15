@@ -2,9 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,500;0,700;1,300;1,700&display=swap");
 
 :root {
-  --card-min-heigth: 200px;
-  --card-max-heigth: 300px;
-  --card-min-width: 200px;
+  --card-max-heigth: 430px;
   --card-max-width: 300px;
 }
 
@@ -29,7 +27,11 @@ section {
   overflow: hidden;
 }
 
-.main-card{
+.drinksList > .container {
+  overflow-x: auto;
+}
+
+.main-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -47,36 +49,54 @@ section {
   padding: 1rem;
   margin: 1rem;
   max-width: var(--card-max-width);
+  max-height: var(--card-max-heigth);
   flex-grow: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   user-select: none;
-  text-overflow: ellipsis;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
 }
 
-.card-header{
+a:link {
+  text-decoration: none;
+  color: #111;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+.card-header {
   flex-grow: 2;
   border-bottom: rgba(2, 0, 36, 1) 100%;
 }
 
-.card-body{
+.card-body {
   flex-grow: 8;
 }
 
-.card-body img{
+.card-body img {
   padding: 1rem;
   border-radius: 50px;
   max-width: var(--card-max-width);
   max-height: fit-content;
 }
 
-.card-footer{
+.card-footer {
   flex-grow: 2;
+  overflow: hidden;
 }
 
 /*NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR */
@@ -117,7 +137,7 @@ ul.nav li.float-right {
 
 /*NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR */
 
-#drinkAleatorio{
+#drinkAleatorio {
   display: flex;
 }
 
@@ -127,7 +147,7 @@ ul.nav li.float-right {
     float: none;
   }
 
-  .main-card{
+  .main-card {
     flex-direction: column;
   }
 }

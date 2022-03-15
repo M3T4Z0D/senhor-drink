@@ -6,8 +6,9 @@ class FrontCodes {
     static listaItens(itens){
         let ul = document.getElementById('listaDrink');
         itens.forEach((item) => {
-            let card = document.createElement('div');
+            let card = document.createElement('a');
             card.setAttribute('class', 'card');
+            card.setAttribute('href', `${this.URL_ROOT}view/visualizar?${item.idDrink}`)
 
             let cardHeader = document.createElement('div');
             cardHeader.setAttribute('class', 'card-header');
@@ -29,13 +30,6 @@ class FrontCodes {
 
             let carousel = document.getElementsByClassName('drinksList')[0].children[0];
             carousel.appendChild(card);
-
-            let link = document.createElement('a');
-            let li = document.createElement('li');
-            li.setAttribute('id', item.idDrink);
-            link.appendChild(document.createTextNode(item.strDrink));
-            li.appendChild(link);
-            ul.appendChild(li);
         });
     }
 
