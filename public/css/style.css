@@ -18,26 +18,26 @@
 }
 
 /* ===== Scrollbar CSS ===== */
-  /* Firefox */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: #020024 #fafafa;
-  }
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #020024 #fafafa;
+}
 
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 10px;
-  }
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
 
-  *::-webkit-scrollbar-track {
-    background: #fafafa;
-  }
+*::-webkit-scrollbar-track {
+  background: #fafafa;
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color: #020024;
-    border-radius: 15px;
-    border: 1px solid #ffffff;
-  }
+*::-webkit-scrollbar-thumb {
+  background-color: #020024;
+  border-radius: 15px;
+  border: 1px solid #ffffff;
+}
 
 html {
   font-family: "Montserrat", sans-serif;
@@ -53,7 +53,7 @@ section {
   display: flex;
 }
 
-input[type=text]{
+input[type="text"] {
   font-size: 1rem;
   padding: 10px;
   border: 1px solid rgb(160, 160, 160);
@@ -62,17 +62,21 @@ input[type=text]{
   margin: 1rem;
 }
 
-input[type=text]:hover{
+input[type="text"]:hover {
   border-width: 2px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-button{
+button {
   margin: auto;
-  padding: 0.5rem;
+  padding: .75rem;
   font-size: 1rem;
   border-radius: 50px;
-  border: 1px solid rgb(58, 58, 58);
+  border: 1px solid #0c9;
+  background-color: #0c9;
+  font-weight: bolder;
+  color: white;
+
 }
 
 .container {
@@ -193,22 +197,22 @@ ul.nav li.float-right {
 
 /* FLOATING BUTTON */
 
-.float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:#0C9;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #0c9;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
 }
 
-.my-float{
-	margin-top:22px;
-} 
+.my-float {
+  margin-top: 22px;
+}
 
 /* FLOATING BUTTON */
 
@@ -220,5 +224,17 @@ ul.nav li.float-right {
 
   .main-card {
     flex-direction: column;
+  }
+
+  .float {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .my-float {
+    margin-top: 12px;
   }
 }
