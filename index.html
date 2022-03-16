@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="public/images/favicon/favicon.ico" type="image/x-icon">
     <title>Drink Teacher</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="public/css/style.css">
     <script src="public/js/apiConnect.js" defer></script>
     <script src="public/js/frontCodes.js"></script>
@@ -15,6 +15,10 @@
 </head>
 
 <body>
+    <a href="#searchCard" class="float">
+        <i class="fas fa-plus my-float"></i>
+    </a>
+    
     <header>
         <nav>
             <ul class="nav">
@@ -31,7 +35,7 @@
 
     <section class="main container">
 
-        <div class="container-item main-card">
+        <div class="container-item main-card" id="searchCard">
             <div class="card" id='drinkAleatorio'>
                 <h2>Clique para gerar um drink aleatório</h2>
             </div>
