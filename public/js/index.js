@@ -6,7 +6,7 @@ window.onload = function () {
 function listenerRandomDrink() {
     let botao = document.getElementById('drinkAleatorio');
 
-    botao.onclick = async function () {
+    botao.onclick = async function (event) {
         event.preventDefault();
         FrontCodes.setLoadingRandom();
         let drink = await Connections.getRandomDrink();
@@ -18,7 +18,7 @@ function listenerRandomDrink() {
 function listenerSearchDrinkByName() {
     let botao = document.getElementById('searchDrink');
 
-    botao.addEventListener('click', async function () {
+    botao.addEventListener('click', async function (event) {
         event.preventDefault();
         let drinkName = document.getElementById('drinkSearch').value;
         let drinks = await Connections.getDrinksByName(drinkName);

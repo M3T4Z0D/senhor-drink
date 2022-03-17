@@ -8,7 +8,7 @@ class FrontCodes {
         itens.forEach((item) => {
             let card = document.createElement('a');
             card.setAttribute('class', 'card');
-            card.setAttribute('href', `${this.URL_ROOT}view/visualizar?${item.idDrink}`)
+            card.setAttribute('href', `${this.URL_ROOT}/public/view/visualizar.html?${item.idDrink}`)
 
             let cardHeader = document.createElement('div');
             cardHeader.setAttribute('class', 'card-header');
