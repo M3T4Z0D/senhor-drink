@@ -42,6 +42,7 @@
 html {
   font-family: "Montserrat", sans-serif;
   background-color: #fafafa;
+  scroll-behavior: smooth;
 }
 
 section {
