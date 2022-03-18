@@ -211,10 +211,13 @@ ul.nav li.float-right {
   border-radius: 50px;
   text-align: center;
   box-shadow: 2px 2px 3px #999;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
-.my-float {
-  margin-top: 22px;
+.float:hover{
+  width: 65px;
+  height: 65px;
 }
 
 /* FLOATING BUTTON */
@@ -235,9 +238,5 @@ ul.nav li.float-right {
     height: 40px;
     bottom: 20px;
     right: 20px;
-  }
-
-  .my-float {
-    margin-top: 12px;
   }
 }

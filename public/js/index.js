@@ -1,4 +1,6 @@
 window.onload = function () {
+    preventDefaultInputs();
+    scrollToTop();
     listenerRandomDrink();
     listenerSearchDrinkByName();
 };
@@ -20,8 +22,34 @@ function listenerSearchDrinkByName() {
 
     botao.addEventListener('click', async function (event) {
         event.preventDefault();
-        let drinkName = document.getElementById('drinkSearch').value;
+
+        let drinkName = Helpers.standardize(document.getElementById('drinkSearch').value);
         let drinks = await Connections.getDrinksByName(drinkName);
+
         FrontCodes.listaItens(drinks);
     });
+}
+
+function scrollToTop() {
+
+    let button = document.getElementById('scrollToTopButton');
+
+    button.addEventListener('click', function () {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        document.getElementsByClassName('main-card')[0].focus();
+    })
+}
+
+function preventDefaultInputs(){
+    let inputs = document.querySelectorAll('input');
+
+    inputs.forEach( input => {
+        input.addEventListener('keyup', function(event){
+            event.preventDefault();
+        })
+    })
 }
