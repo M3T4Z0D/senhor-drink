@@ -26,6 +26,16 @@ function listenerSearchDrinkByName() {
         let drinkName = Helpers.standardize(document.getElementById('drinkSearch').value);
         let drinks = await Connections.getDrinksByName(drinkName);
 
+        if (!drinks) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Opa... tem algum problema',
+                text: `${drinkName} não foi encontrado em nossa base de dados.`
+            })
+
+            document.getElementById('drinkSearch').value = '';
+        }
+
         FrontCodes.listaItens(drinks);
     });
 }
