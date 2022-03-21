@@ -4,7 +4,9 @@ class FrontCodes {
     static pathLoadingGif = `${this.URL_ROOT}/public/images/drink_loader.gif`;
 
     static listaItens(itens) {
-        let ul = document.getElementById('listaDrink');
+        let ul = document.getElementsByClassName('drinksList')[0].children[0];
+        this.removeChildren(ul);
+        
         itens.forEach((item) => {
             let card = document.createElement('a');
             card.setAttribute('class', 'card');
@@ -53,5 +55,11 @@ class FrontCodes {
         let text = document.createElement('h2');
         text.appendChild(document.createTextNode(this.textRandom));
         cardRandom.appendChild(text);
+    }
+
+    static removeChildren(nodeParent) {
+        while (nodeParent.hasChildNodes()) {
+            nodeParent.removeChild(nodeParent.lastChild);
+        }
     }
 }
