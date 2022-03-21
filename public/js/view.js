@@ -17,6 +17,7 @@ async function showDrink() {
     let drink = await Connections.getDrinkById(searchParams);
 
     drink = drink[0];
+    defineWindowTitle(drink.strDrink);
 
     document.getElementById('nomeDrink').textContent = drink.strDrink;
 }
@@ -37,4 +38,8 @@ async function showError(errorCode) {
 
     document.body.appendChild(imgError)
     return;
+}
+
+function defineWindowTitle(name){
+    document.title = name;
 }
