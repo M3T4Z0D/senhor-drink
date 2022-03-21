@@ -44,11 +44,11 @@ function scrollToTop() {
     })
 }
 
-function preventDefaultInputs(){
+function preventDefaultInputs() {
     let inputs = document.querySelectorAll('input');
 
-    inputs.forEach( input => {
-        input.addEventListener('keyup', function(event){
+    inputs.forEach(input => {
+        input.addEventListener('keyup', function (event) {
             event.preventDefault();
         })
     })

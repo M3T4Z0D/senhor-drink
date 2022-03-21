@@ -3,16 +3,16 @@ window.onload = async function () {
     showDrink();
 }
 
-async function showDrink(){
+async function showDrink() {
     let searchParams = getSearchParameters();
-    
-    if (searchParams == null){
+
+    if (searchParams == null) {
         showError('404');
         return;
     }
-    
+
     searchParams = searchParams.split('?')[1];
-    
+
     let drink = await Connections.getDrinkById(searchParams);
     console.log(drink);
 }
@@ -23,7 +23,7 @@ function getSearchParameters() {
     return parameters != '' ? parameters : null;
 }
 
-async function showError(errorCode){
+async function showError(errorCode) {
     document.body.style.display = 'flex';
     document.body.style.backgroundColor = 'black';
 

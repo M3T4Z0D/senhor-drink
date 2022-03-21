@@ -3,7 +3,7 @@ class FrontCodes {
     static URL_ROOT = location.href.substring(0, location.href.lastIndexOf('/') + 1);
     static pathLoadingGif = `${this.URL_ROOT}/public/images/drink_loader.gif`;
 
-    static listaItens(itens){
+    static listaItens(itens) {
         let ul = document.getElementById('listaDrink');
         itens.forEach((item) => {
             let card = document.createElement('a');
@@ -37,7 +37,7 @@ class FrontCodes {
         });
     }
 
-    static setLoadingRandom(){
+    static setLoadingRandom() {
         let cardRandom = document.getElementById('drinkAleatorio');
         cardRandom.style.pointerEvents = 'none';
         cardRandom.innerHTML = '';
@@ -46,7 +46,7 @@ class FrontCodes {
         cardRandom.appendChild(link);
     }
 
-    static setRandomText(){
+    static setRandomText() {
         let cardRandom = document.getElementById('drinkAleatorio');
         cardRandom.style.pointerEvents = 'all';
         cardRandom.innerHTML = '';

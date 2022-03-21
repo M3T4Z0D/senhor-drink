@@ -70,14 +70,13 @@ input[type="text"]:hover {
 
 button {
   margin: auto;
-  padding: .75rem;
+  padding: 0.75rem;
   font-size: 1rem;
   border-radius: 50px;
   border: 1px solid #0c9;
   background-color: #0c9;
   font-weight: bolder;
   color: white;
-
 }
 
 .container {
@@ -215,7 +214,7 @@ ul.nav li.float-right {
   cursor: pointer;
 }
 
-.float:hover{
+.float:hover {
   width: 65px;
   height: 65px;
 }
