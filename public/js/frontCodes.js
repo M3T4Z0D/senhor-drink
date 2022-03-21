@@ -1,7 +1,7 @@
 class FrontCodes {
     static textRandom = 'Clique para gerar um drink aleatório';
     static URL_ROOT = location.href.substring(0, location.href.lastIndexOf('/') + 1);
-    static pathLoadingGif = `${this.URL_ROOT}/public/images/drink_loader.gif`;
+    static pathLoadingGif = `${this.URL_ROOT}public/images/drink_loader.gif`;
 
     static listaItens(itens) {
         let ul = document.getElementsByClassName('drinksList')[0].children[0];
@@ -10,7 +10,7 @@ class FrontCodes {
         itens.forEach((item) => {
             let card = document.createElement('a');
             card.setAttribute('class', 'card');
-            card.setAttribute('href', `${this.URL_ROOT}/public/view/visualizar.html?${item.idDrink}`)
+            card.setAttribute('href', `${this.URL_ROOT}public/view/visualizar.html?${item.idDrink}`)
 
             let cardHeader = document.createElement('div');
             cardHeader.setAttribute('class', 'card-header');

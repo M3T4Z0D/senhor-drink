@@ -1,3 +1,4 @@
+var drinkGlobal;
 window.onload = async function () {
     //TO-DO
     showDrink();
@@ -14,7 +15,10 @@ async function showDrink() {
     searchParams = searchParams.split('?')[1];
 
     let drink = await Connections.getDrinkById(searchParams);
-    console.log(drink);
+
+    drink = drink[0];
+
+    document.getElementById('nomeDrink').textContent = drink.strDrink;
 }
 
 function getSearchParameters() {

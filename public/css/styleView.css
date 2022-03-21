@@ -1,0 +1,19 @@
+@import url(../fonts/BadScript-Regular.ttf);
+
+.title{
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.title h1{
+    font-size: 2rem;
+    font-family: 'Bad Script Regular', cursive;
+    color: #0c9;
+    text-shadow: 2px 2px 2px #00c8fc;
+    font-weight: 800;
+    text-decoration: underline;
+    text-decoration-color: black;
+    text-decoration-thickness: 1%;
+    text-underline-offset: 20%;
+}
