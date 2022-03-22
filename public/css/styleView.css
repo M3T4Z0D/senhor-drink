@@ -1,4 +1,4 @@
-@import url(../fonts/BadScript-Regular.ttf);
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
 
 .title{
     padding: 1rem;
@@ -7,13 +7,11 @@
 }
 
 .title h1{
-    font-size: 2rem;
-    font-family: 'Bad Script Regular', cursive;
-    color: #0c9;
-    text-shadow: 2px 2px 2px #00c8fc;
+    font-size: 3rem;
     font-weight: 800;
+    font-family: 'Nanum Myeongjo', serif;
     text-decoration: underline;
-    text-decoration-color: black;
-    text-decoration-thickness: 1%;
-    text-underline-offset: 20%;
+    text-decoration-color: #0c9;
+    text-decoration-thickness: 5%;
+    text-underline-offset: 10%;
 }

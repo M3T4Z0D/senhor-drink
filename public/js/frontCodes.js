@@ -62,4 +62,13 @@ class FrontCodes {
             nodeParent.removeChild(nodeParent.lastChild);
         }
     }
+
+    static viewItem(drink){
+        document.getElementById('nomeDrink').textContent = drink.strDrink;
+        
+        let imgDrink = document.querySelector('#imgDrink');
+        imgDrink.setAttribute('src', drink.strDrinkThumb);
+        imgDrink.setAttribute('alt', `Foto frontal do drink ${drink.strDrink}`);
+        
+    }
 }

@@ -18,8 +18,8 @@ async function showDrink() {
 
     drink = drink[0];
     defineWindowTitle(drink.strDrink);
-
-    document.getElementById('nomeDrink').textContent = drink.strDrink;
+    console.log(drink);
+    FrontCodes.viewItem(drink);
 }
 
 function getSearchParameters() {
