@@ -1,0 +1,21 @@
+# Credenciais e ambiente
+.env
+.env.local
+
+# Flutter
+**/android/.gradle
+**/android/local.properties
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/build/
+**/.packages
+**/pubspec.lock
+
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.iml
