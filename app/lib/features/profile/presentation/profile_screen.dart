@@ -210,7 +210,7 @@ class _ProfileContent extends ConsumerWidget {
                 final valid =
                     drinks.whereType<Object>().toList();
                 return SizedBox(
-                  height: 160,
+                  height: 200,
                   child: ListView.separated(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     scrollDirection: Axis.horizontal,
@@ -220,7 +220,7 @@ class _ProfileContent extends ConsumerWidget {
                       final drink = drinks[i];
                       if (drink == null) return const SizedBox.shrink();
                       return SizedBox(
-                        width: 140,
+                        width: 150,
                         child: DrinkCard(
                           drink: drink,
                           onTap: () => context.push('/drink/${drink.id}'),

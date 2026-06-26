@@ -49,6 +49,9 @@ dependencies:
   # Upload de imagem
   image_picker: ^1.1.2
 
+  # Fontes
+  google_fonts: ^6.2.1
+
   # Imagens
   cached_network_image: ^3.4.1
 
