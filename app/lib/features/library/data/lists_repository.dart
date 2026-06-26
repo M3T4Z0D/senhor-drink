@@ -14,7 +14,7 @@ class ListsRepository {
   Future<List<DrinkList>> getUserLists() async {
     final data = await _client
         .from('drink_lists')
-        .select()
+        .select('*, list_items(count)')
         .eq('user_id', _uid)
         .order('created_at', ascending: false);
     return (data as List).map((r) => DrinkList.fromJson(r as Map<String, dynamic>)).toList();

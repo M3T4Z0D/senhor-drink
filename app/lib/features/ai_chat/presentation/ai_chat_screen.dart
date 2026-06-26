@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/mr_drink_app_bar.dart';
 import '../data/ai_chat_repository.dart';
 import '../data/ai_message_model.dart';
 
@@ -58,6 +59,11 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen>
     _scrollToBottom();
   }
 
+  void _sendSuggestion(String text) {
+    _controller.text = text;
+    _send();
+  }
+
   @override
   Widget build(BuildContext context) {
     final chatState = ref.watch(aiChatProvider);
@@ -71,29 +77,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen>
     return Scaffold(
       backgroundColor: AppColors.background,
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Guru IA',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w700,
-                  ),
-            ),
-            Text(
-              'Seu Assistente de Mixologia',
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: AppColors.textSecondary,
-                    letterSpacing: 0.08,
-                  ),
-            ),
-          ],
-        ),
-      ),
+      appBar: const MrDrinkAppBar(),
       body: Stack(
         children: [
           // ── Aurora glow background ───────────────────────────
@@ -101,9 +85,9 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen>
             animation: _auroraAnim,
             builder: (ctx, _) {
               final t = _auroraAnim.value;
-              final dx = lerpDouble(-0.08, 0.08, t)!;
-              final dy = lerpDouble(-0.08, 0.08, t)!;
-              final scale = lerpDouble(1.0, 1.12, t)!;
+              final dx = -0.08 + 0.16 * t;
+              final dy = -0.08 + 0.16 * t;
+              final scale = 1.0 + 0.12 * t;
               return Positioned.fill(
                 child: OverflowBox(
                   maxWidth: double.infinity,
@@ -166,15 +150,30 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen>
               Expanded(
                 child: chatState.loadingHistory
                     ? const Center(child: CircularProgressIndicator())
-                    : chatState.messages.isEmpty
-                        ? const _EmptyState()
-                        : ListView.builder(
-                            controller: _scrollController,
-                            padding: const EdgeInsets.fromLTRB(16, 96, 16, 16),
-                            itemCount: chatState.messages.length,
-                            itemBuilder: (context, i) =>
-                                _MessageBubble(message: chatState.messages[i]),
-                          ),
+                    : ListView.builder(
+                        controller: _scrollController,
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                        itemCount: chatState.messages.length +
+                            (chatState.messages.isEmpty ? 2 : 1),
+                        itemBuilder: (context, index) {
+                          // Always-first: hero header
+                          if (index == 0) return _ChatHeader();
+
+                          // Second slot when empty: suggestion bento grid
+                          if (chatState.messages.isEmpty && index == 1) {
+                            return _SuggestionBento(
+                              onSuggest: _sendSuggestion,
+                            );
+                          }
+
+                          final msgIndex = chatState.messages.isEmpty
+                              ? index - 2
+                              : index - 1;
+                          return _MessageBubble(
+                            message: chatState.messages[msgIndex],
+                          );
+                        },
+                      ),
               ),
               if (chatState.error != null)
                 Padding(
@@ -209,60 +208,164 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen>
   }
 }
 
-// ── Empty state ───────────────────────────────────────────────────────────────
+// ── Chat header (first list item) ─────────────────────────────────────────────
 
-class _EmptyState extends StatelessWidget {
-  const _EmptyState();
+class _ChatHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final topPad = MediaQuery.of(context).padding.top + kToolbarHeight;
+
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, topPad + 24, 0, 28),
+      child: Column(
+        children: [
+          Container(
+            width: 64,
+            height: 64,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.primary.withAlpha(25),
+              border: Border.all(color: AppColors.primary.withAlpha(51)),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withAlpha(51),
+                  blurRadius: 24,
+                  spreadRadius: 4,
+                ),
+              ],
+            ),
+            child: const Icon(Icons.auto_awesome, size: 32, color: AppColors.primary),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Guru IA',
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: AppColors.primary,
+                ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'SEU ASSISTENTE DE MIXOLOGIA',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: AppColors.textSecondary,
+                  letterSpacing: 0.15,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Suggestion bento cards (shown only when no messages) ─────────────────────
+
+class _SuggestionBento extends StatelessWidget {
+  const _SuggestionBento({required this.onSuggest});
+  final void Function(String) onSuggest;
+
+  static const _suggestions = [
+    (icon: Icons.liquor, color: AppColors.primary, title: 'Mix de Gins', label: 'Receitas refrescantes', query: 'Quero drinks com gin, que mistura você sugere?'),
+    (icon: Icons.local_bar, color: AppColors.vermouthRed, title: 'Clássicos', label: 'Negroni e mais', query: 'Me ensine a fazer um Negroni clássico.'),
+    (icon: Icons.wb_sunny_outlined, color: AppColors.lemonYellow, title: 'Sem Álcool', label: 'Mocktails criativos', query: 'Me sugira drinks sem álcool, mocktails criativos.'),
+    (icon: Icons.science_outlined, color: AppColors.mintGreen, title: 'Inventar', label: 'Com o que tenho', query: 'Tenho limão, hortelã e água com gás. O que posso fazer?'),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 72,
-              height: 72,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.primary.withAlpha(25),
-                border: Border.all(color: AppColors.primary.withAlpha(51)),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withAlpha(51),
-                    blurRadius: 24,
-                    spreadRadius: 4,
-                  ),
-                ],
-              ),
-              child: const Icon(Icons.auto_awesome, size: 36, color: AppColors.primary),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Me diga quais ingredientes você tem\nou escolha uma categoria:',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+          ),
+          const SizedBox(height: 16),
+          GridView.count(
+            crossAxisCount: 2,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+            childAspectRatio: 1.4,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: _suggestions
+                .map((s) => _BentoCard(
+                      icon: s.icon,
+                      iconColor: s.color,
+                      title: s.title,
+                      label: s.label,
+                      onTap: () => onSuggest(s.query),
+                    ))
+                .toList(),
+          ),
+          const SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+}
+
+class _BentoCard extends StatelessWidget {
+  const _BentoCard({
+    required this.icon,
+    required this.iconColor,
+    required this.title,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final Color iconColor;
+  final String title;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(14),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(14, 14, 14, 10),
+            decoration: BoxDecoration(
+              color: AppColors.stoneMid.withAlpha(166),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: AppColors.primary.withAlpha(38)),
             ),
-            const SizedBox(height: 20),
-            Text(
-              'Guru IA',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: AppColors.primary,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(icon, color: iconColor, size: 22),
+                const Spacer(),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontFamily: 'Outfit',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textPrimary,
                   ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'SEU ASSISTENTE DE MIXOLOGIA',
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    fontFamily: 'Outfit',
+                    fontSize: 11,
                     color: AppColors.textSecondary,
-                    letterSpacing: 0.15,
+                    letterSpacing: 0.04,
                   ),
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
-            Text(
-              'Me diga quais ingredientes você tem e vou criar drinks incríveis para você!',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -340,7 +443,7 @@ class _MessageBubble extends StatelessWidget {
             Container(
               width: 32,
               height: 32,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColors.primary,
               ),
@@ -492,6 +595,3 @@ class _InputBar extends StatelessWidget {
     );
   }
 }
-
-// ignore: unused_import
-double? lerpDouble(double a, double b, double t) => a + (b - a) * t;

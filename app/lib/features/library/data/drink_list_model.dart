@@ -6,6 +6,7 @@ class DrinkList {
     this.description,
     required this.isPublic,
     required this.createdAt,
+    this.drinkCount,
   });
 
   final String id;
@@ -14,15 +15,23 @@ class DrinkList {
   final String? description;
   final bool isPublic;
   final DateTime createdAt;
+  final int? drinkCount;
 
-  factory DrinkList.fromJson(Map<String, dynamic> json) => DrinkList(
-        id: json['id'] as String,
-        userId: json['user_id'] as String,
-        name: json['name'] as String,
-        description: json['description'] as String?,
-        isPublic: json['is_public'] as bool? ?? false,
-        createdAt: DateTime.parse(json['created_at'] as String),
-      );
+  factory DrinkList.fromJson(Map<String, dynamic> json) {
+    final items = json['list_items'] as List?;
+    final count = (items?.isNotEmpty == true)
+        ? (items!.first as Map)['count'] as int?
+        : null;
+    return DrinkList(
+      id: json['id'] as String,
+      userId: json['user_id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String?,
+      isPublic: json['is_public'] as bool? ?? false,
+      createdAt: DateTime.parse(json['created_at'] as String),
+      drinkCount: count,
+    );
+  }
 }
 
 class ListItem {
